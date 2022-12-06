@@ -1,0 +1,84 @@
+.modalCreator {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0 ,0 ,0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+  z-index: 3;
+}
+
+.modalCreator.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modalCreator__content {
+  padding: 20px;
+  border-radius: 12px;
+  background-color: white;
+  transform: scale(0.5);
+  transition: 0.4s all;
+  &__title {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 500;
+    border: none;
+    border-bottom: 1px solid grey;
+    outline: none;
+  }
+  &__title:focus {
+    border: none;
+    border-bottom: 1px solid grey;
+  }
+  &__subtask {
+    font-size: 12px;
+    color: white;
+    font-weight: 300;
+    background-color: darkcyan;
+    border: none;
+    width: 90px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  &__description {
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 300;
+    border: none;
+    outline: none;
+  }
+  &__description:focus {
+    border: none;
+  }
+
+  &__comments {
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 300;
+    border-radius: 4px;
+    outline: none;
+  }
+  &__button {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    background-color: darkcyan;
+    border: none;
+    width: 90px;
+    height: 30px;
+    margin-top: 40px;
+    border-radius: 8px;
+  }
+}
+
+.modalCreator__content.active {
+  transform: scale(1);
+}
