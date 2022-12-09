@@ -6,7 +6,9 @@
 
 h1 {
   word-break: break-all;
-  font-size: 13px;
+  @media (max-width: 450px) {
+    font-size: 13px;
+  }
 }
 
 p {
@@ -112,6 +114,7 @@ p {
         height: 20px;
         border-radius: 6px;
         margin-left: 0;
+        margin-top: 2px;
       }
     }
 
