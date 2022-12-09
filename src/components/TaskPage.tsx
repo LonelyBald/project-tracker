@@ -1,10 +1,9 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { DragEvent, useState } from 'react';
 import '../scss/modalEdit.scss';
 import '../scss/modalCreator.scss';
 import '../scss/tasks.scss';
 import { ModalCreator } from './ModalCreator';
 import { useColumns } from '../hooks/useColumns';
-import { Priority } from './Priority';
 import { ModalEdit } from './ModalEdit';
 import { Clear } from './Clear';
 
@@ -23,85 +22,86 @@ export interface ITask {
   comments: string;
   date: string;
 }
+export type ChangeTaskArgType = { [T: string]: number | string };
 
 export const TaskPage = () => {
   const { columns, setColumns } = useColumns();
-  const [currentBoard, setCurrentBoard] = useState(null);
-  const [currentItem, setCurrentItem] = useState(null);
+  const [currentBoard, setCurrentBoard] = useState<IColumn | null>(null);
+  const [currentItem, setCurrentItem] = useState<ITask | null>(null);
   const [modalEditActive, setModalEditActive] = useState(false);
   const [modalCreatorActive, setModalCreatorActive] = useState(false);
-  const dragOverHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (e.target.className == 'item') {
-      e.target.style.boxShadow = '0 4px 3px gray';
+
+  const [currentColumnIndex, setCurrentColumnIndex] = useState(0);
+  const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
+
+  const changeTask = (changedTask: ChangeTaskArgType) => {
+    const columnsCopy = [...columns];
+    const tasksCopy = [...columnsCopy[currentTaskIndex].tasks];
+
+    tasksCopy[currentTaskIndex] = { ...tasksCopy[currentTaskIndex], ...changedTask };
+
+    columnsCopy[currentColumnIndex] = {
+      ...columnsCopy[currentColumnIndex],
+      tasks: tasksCopy,
+    };
+
+    if (setColumns) {
+      setColumns(columnsCopy);
     }
   };
 
-  const dragLeaveHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    e.target.style.boxShadow = 'none';
+  const changeIndexes = (taskIndex: number, columnIndex: number) => {
+    setCurrentColumnIndex(columnIndex);
+    setCurrentTaskIndex(taskIndex);
   };
 
-  const dragStartHandler = (e: ChangeEvent<HTMLInputElement>, board, item) => {
+  const dragStartHandler = (e: DragEvent<HTMLDivElement>, board: IColumn, item: ITask) => {
     setCurrentBoard(board);
     setCurrentItem(item);
   };
 
-  const dragEndHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    e.target.style.boxShadow = 'none';
-  };
-
-  const dropHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.target.style.boxShadow = 'none';
-  };
-
-  const dropCardHandler = (e: ChangeEvent<HTMLInputElement>, board) => {
-    board.tasks.push(currentItem);
-    const currentIndex = currentBoard.tasks.indexOf(currentItem);
-    currentBoard.tasks.splice(currentIndex, 1);
-    setColumns(() => {
-      return columns.map((column) => {
-        if (column.id === board.id) {
-          return board;
-        }
-        if (column.id === currentBoard.id) {
-          return currentBoard;
-        }
-        return column;
+  const dropCardHandler = (e: DragEvent<HTMLDivElement>, board: IColumn) => {
+    if (currentBoard && setColumns && currentItem) {
+      board.tasks.push(currentItem);
+      const currentIndex = currentBoard.tasks.indexOf(currentItem);
+      currentBoard.tasks.splice(currentIndex, 1);
+      setColumns(() => {
+        return columns.map((column) => {
+          if (column.id === board.id) {
+            return board;
+          }
+          if (column.id === currentBoard.id) {
+            return currentBoard;
+          }
+          return column;
+        });
       });
-    });
+    }
   };
 
   return (
     <div className="wrapper">
-      {columns.map((column, index) => (
+      {columns.map((column, indexColumn) => (
         <div
+          key={column.id}
           onDrop={(e) => dropCardHandler(e, column)}
-          onDragOver={(e) => dragOverHandler(e)}
+          onDragOver={(e) => e.preventDefault()}
           className="board"
         >
           <div className="title">
             {column.title}
             {column.title === 'Queue' && (
-              <>
-                <button className="title__button" onClick={() => setModalCreatorActive(true)}>
-                  +
-                </button>
-                <ModalCreator
-                  active={modalCreatorActive}
-                  setActive={setModalCreatorActive}
-                  column={column}
-                ></ModalCreator>
-              </>
+              <button className="title__button" onClick={() => setModalCreatorActive(true)}>
+                +
+              </button>
             )}
           </div>
-          {column.tasks.map((task, index) => (
+          {column.tasks.map((task, indexTask) => (
             <div
-              onDragOver={(e) => dragOverHandler(e)}
-              onDrop={(e) => dropHandler(e)}
-              onDragEnd={(e) => dragEndHandler(e)}
+              key={indexTask + column.id}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => e.preventDefault()}
               onDragStart={(e) => dragStartHandler(e, column, task)}
-              onDragLeave={(e) => dragLeaveHandler(e)}
               draggable="true"
               className="item"
             >
@@ -110,21 +110,23 @@ export const TaskPage = () => {
               <p>Comments: {task.comments}</p>
               <p>{task.time}</p>
               <p>{task.date}</p>
-              <button className="edit__button" onClick={() => setModalEditActive(true)}>
+              <p>{task.priority}</p>
+              <button
+                className="edit__button"
+                onClick={() => {
+                  setModalEditActive(true);
+                  changeIndexes(indexTask, indexColumn);
+                }}
+              >
                 Edit
               </button>
-              <Priority priorityDefault={task.priority} task={task} column={column} />
               <Clear task={task} column={column} />
-              <ModalEdit
-                active={modalEditActive}
-                setActive={setModalEditActive}
-                task={task}
-                column={column}
-              />
             </div>
           ))}
         </div>
       ))}
+      <ModalCreator active={modalCreatorActive} setActive={setModalCreatorActive} />
+      <ModalEdit active={modalEditActive} setActive={setModalEditActive} changeTask={changeTask} />
     </div>
   );
 };

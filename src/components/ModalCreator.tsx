@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { IColumn, ITask } from './TaskPage';
+import { ITask } from './TaskPage';
 import { useColumns } from '../hooks/useColumns';
 
 export interface ActiveType {
@@ -13,6 +13,7 @@ export const ModalCreator = ({ active, setActive }: ActiveType) => {
   const [titleInputValue, setTitleInputValue] = useState('');
   const [descInputValue, setDescInputValue] = useState('');
   const [commentsInputValue, setCommentsInputValue] = useState('');
+  const [priorityInputValue, setPriorityInputValue] = useState('');
   const { columns, setColumns } = useColumns();
   const isMounted = useRef(false);
   const onChangeTitleInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +27,10 @@ export const ModalCreator = ({ active, setActive }: ActiveType) => {
     setCommentsInputValue(event.target.value);
   };
 
+  const onChangePriorityInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setPriorityInputValue(event.target.value);
+  };
+
   const handleAddTask = () => {
     const columnsCopy = [...columns];
     const time = new Date().toLocaleTimeString('en-GB');
@@ -35,12 +40,17 @@ export const ModalCreator = ({ active, setActive }: ActiveType) => {
       desc: descInputValue,
       time: time,
       date: date,
-      priority: 'Highest',
+      comments: commentsInputValue,
+      priority: priorityInputValue,
     } as ITask);
 
     if (setColumns) {
       setColumns(columnsCopy);
     }
+
+    setTitleInputValue('');
+    setCommentsInputValue('');
+    setDescInputValue('');
   };
 
   useEffect(() => {
@@ -50,12 +60,13 @@ export const ModalCreator = ({ active, setActive }: ActiveType) => {
     isMounted.current = true;
   }, [columns]);
 
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('items'));
-    if (items) {
-      setColumns(items);
-    }
-  }, [setColumns]);
+  // useEffect(() => {
+  //   const items = localStorage.getItem('items');
+  //   if (items && setColumns) {
+  //     const parsedItems = JSON.parse(items);
+  //     setColumns(parsedItems);
+  //   }
+  // }, [setColumns]);
 
   return (
     <div
@@ -74,7 +85,6 @@ export const ModalCreator = ({ active, setActive }: ActiveType) => {
           type="text"
           placeholder="Add title..."
         />
-        <button className="modalCreator__content__subtask">Add subtask</button>
         <div>Description</div>
         <input
           className="modalCreator__content__description"
@@ -90,6 +100,14 @@ export const ModalCreator = ({ active, setActive }: ActiveType) => {
           placeholder="Add comments..."
           value={commentsInputValue}
           onChange={onChangeCommentsInput}
+        />
+        <div>Priority</div>
+        <input
+          className="modalCreator__content__comments"
+          type="text"
+          placeholder="Add comments..."
+          value={priorityInputValue}
+          onChange={onChangePriorityInput}
         />
         <button className="modalCreator__content__button" onClick={handleAddTask}>
           Add task

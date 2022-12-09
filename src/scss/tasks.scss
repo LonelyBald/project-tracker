@@ -59,6 +59,7 @@
   margin: 5px 0;
   cursor: grab;
   background-color: #fcfcf9;
+  box-shadow: none;
   &__priority {
     position: relative;
     &__label {
@@ -110,6 +111,14 @@
       }
     }
   }
+  &__trash {
+      width: 25px;
+      height: 25px;
+    position: relative;
+    margin-left: 90%;
+    margin-bottom: 10px;
+    cursor: default;
+  }
 }
 
 .edit {
@@ -131,5 +140,4 @@
     color: #fcfcf9;
     background-color: darkcyan;
   }
-
 }
