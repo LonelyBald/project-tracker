@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+h1 {
+  word-break: break-all;
+  font-size: 13px;
+}
+
+p {
+  word-break: break-all;
+}
+
 .wrapper {
   width: 100vw;
   height: 100vh;
