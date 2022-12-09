@@ -59,24 +59,21 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
   }, [columns]);
 
   return (
-    <div
-      className={active ? 'modalCreator active' : 'modalCreator'}
-      onClick={() => setActive(false)}
-    >
+    <div className={active ? 'modal active' : 'modal'} onClick={() => setActive(false)}>
       <div
-        className={active ? 'modalCreator__content active' : 'modalCreator__content'}
+        className={active ? 'modal__content active' : 'modal__content'}
         onClick={(e) => e.stopPropagation()}
       >
         <input
           value={titleInputValue}
           onChange={onChangeTitleInput}
-          className="modalCreator__content__title"
+          className="modal__content__title"
           type="text"
           placeholder="Add title..."
         />
         <div>Description</div>
         <input
-          className="modalCreator__content__description"
+          className="modal__content__description"
           type="text"
           placeholder="Add description..."
           value={descInputValue}
@@ -84,7 +81,7 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
         />
         <div>Comments</div>
         <input
-          className="modalCreator__content__comments"
+          className="modal__content__comments"
           type="text"
           placeholder="Add comments..."
           value={commentsInputValue}
@@ -92,13 +89,13 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
         />
         <div>Priority</div>
         <input
-          className="modalCreator__content__comments"
+          className="modal__content__comments"
           type="text"
           placeholder="Add priority..."
           value={priorityInputValue}
           onChange={onChangePriorityInput}
         />
-        <button className="modalCreator__content__button" onClick={handleAddTask}>
+        <button className="modal__content__button" onClick={handleAddTask}>
           Add task
         </button>
       </div>

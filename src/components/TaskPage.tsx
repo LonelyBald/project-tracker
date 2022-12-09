@@ -1,6 +1,5 @@
 import React, { DragEvent, useState } from 'react';
-import '../scss/modalEdit.scss';
-import '../scss/modalCreator.scss';
+import '../scss/modal.scss';
 import '../scss/tasks.scss';
 import { ModalCreator } from './ModalCreator';
 import { useColumns } from '../hooks/useColumns';

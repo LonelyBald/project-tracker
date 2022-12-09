@@ -1,8 +1,9 @@
-.modalCreator {
+
+.modal {
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0 ,0 ,0.2);
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   display: flex;
@@ -11,15 +12,15 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.5s;
-  z-index: 3;
+  z-index: 4;
 }
 
-.modalCreator.active {
+.modal.active {
   opacity: 1;
   pointer-events: all;
 }
 
-.modalCreator__content {
+.modal__content {
   padding: 20px;
   border-radius: 12px;
   background-color: white;
@@ -33,45 +34,64 @@
     border-bottom: 1px solid grey;
     outline: none;
     margin: 10px 0;
-  }
-  &__title:focus {
-    border: none;
-    border-bottom: 1px solid grey;
+    :focus {
+      border: none;
+      border-bottom: 1px solid grey;
+    }
   }
 
   &__description {
     width: 100%;
     font-size: 1rem;
     font-weight: 300;
-    border: none;
     outline: none;
     margin-bottom: 10px;
+    border: 1px solid transparent;
+
   }
+
   &__description:focus {
-    border: none;
+    border-bottom: 1px solid darkcyan;
   }
 
   &__comments {
     width: 100%;
     font-size: 1rem;
     font-weight: 300;
-    border-radius: 4px;
     outline: none;
     margin-bottom: 10px;
+    border: 1px solid transparent;
   }
+
+  &__comments:focus {
+    border-bottom: 1px solid darkcyan;
+  }
+
+  &__priority {
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 300;
+    outline: none;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+  }
+
+  &__priority:focus {
+    border-bottom: 1px solid darkcyan;
+  }
+
   &__button {
     font-size: 20px;
     color: white;
     font-weight: bold;
     background-color: darkcyan;
+    padding: 8px;
     border: none;
-    width: 90px;
-    height: 30px;
     margin-top: 40px;
     border-radius: 8px;
   }
 }
 
-.modalCreator__content.active {
+.modal__content.active {
   transform: scale(1);
 }

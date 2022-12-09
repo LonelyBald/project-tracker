@@ -12,6 +12,7 @@ export const ModalEdit = ({ active, setActive, changeTask }: ModalEditProps) => 
   const [titleInputValue, setTitleInputValue] = useState('');
   const [descInputValue, setDescInputValue] = useState('');
   const [commentsInputValue, setCommentsInputValue] = useState('');
+  const [priorityInputValue, setPriorityInputValue] = useState('');
   const onChangeTitleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setTitleInputValue(event.target.value);
   };
@@ -21,6 +22,9 @@ export const ModalEdit = ({ active, setActive, changeTask }: ModalEditProps) => 
 
   const onChangeCommentsInput = (event: ChangeEvent<HTMLInputElement>) => {
     setCommentsInputValue(event.target.value);
+  };
+  const onChangePriorityInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setPriorityInputValue(event.target.value);
   };
 
   const handleEditTask = () => {
@@ -33,6 +37,7 @@ export const ModalEdit = ({ active, setActive, changeTask }: ModalEditProps) => 
       date: date,
       comments: commentsInputValue,
     });
+    setPriorityInputValue('');
     setTitleInputValue('');
     setCommentsInputValue('');
     setDescInputValue('');
@@ -41,11 +46,11 @@ export const ModalEdit = ({ active, setActive, changeTask }: ModalEditProps) => 
   return (
     <div className={active ? 'modalEdit active' : 'modalEdit'} onClick={() => setActive(false)}>
       <div
-        className={active ? 'modalEdit__content active' : 'modalEdit__content'}
+        className={active ? 'modal__content active' : 'modal__content'}
         onClick={(e) => e.stopPropagation()}
       >
         <input
-          className="modalEdit__content__title"
+          className="modal__content__title"
           type="text"
           placeholder="Edit title..."
           value={titleInputValue}
@@ -53,7 +58,7 @@ export const ModalEdit = ({ active, setActive, changeTask }: ModalEditProps) => 
         />
         <div>Description</div>
         <input
-          className="modalEdit__content__description"
+          className="modal__content__description"
           type="text"
           placeholder="Edit description..."
           value={descInputValue}
@@ -61,13 +66,21 @@ export const ModalEdit = ({ active, setActive, changeTask }: ModalEditProps) => 
         />
         <div>Comments</div>
         <input
-          className="modalEdit__content__comments"
+          className="modal__content__comments"
           type="text"
           placeholder="Edit comments..."
           value={commentsInputValue}
           onChange={onChangeCommentsInput}
         />
-        <button className="modalEdit__content__button" onClick={handleEditTask}>
+        <div>Priority</div>
+        <input
+          className="modal__content__priority"
+          type="text"
+          placeholder="Edit priority..."
+          value={priorityInputValue}
+          onChange={onChangePriorityInput}
+        />
+        <button className="modal__content__button" onClick={handleEditTask}>
           Edit task
         </button>
       </div>

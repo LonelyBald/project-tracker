@@ -16,12 +16,10 @@ p {
 }
 
 .wrapper {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
-  margin-top: 10%;
-  max-height: 1000px;
+  margin-top: 32px;
+  height: 100%;
 }
 
 .board {
@@ -50,34 +48,36 @@ p {
   @media (max-width: 450px) {
     font-size: 13px;
   }
-    &__button {
-      font-size: 20px;
-      color: darkcyan;
-      font-weight: bold;
-      border-color: darkcyan;
-      width: 30px;
-      height: 30px;
-      margin-left: 40px;
-      border-radius: 8px;
-      @media (max-width: 450px) {
-        font-size: 9px;
-        width: 20px;
-        height: 20px;
-        border-radius: 6px;
-        margin-left: 10px;
-      }
-      &__edit {
-        width: 60px;
-      }
+  p{
+    flex: 2;
+    text-align: center;
+    @media (max-width: 450px) {
+      font-size: 13px;
     }
-    &__button:hover {
-      border: none;
+  }
+  button {
+    font-size: 20px;
+    color: darkcyan;
+    font-weight: bold;
+    border: 2px solid darkcyan;
+    padding: 2px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      border: 2px solid transparent;
       color: #fcfcf9;
       background-color: darkcyan;
-      &__edit {
-
-      }
     }
+
+    @media (max-width: 450px) {
+      padding: 2px 4px;
+      font-size: 9px;
+      border-radius: 8px;
+      margin-left: 10px;
+    }
+
+  }
 
 }
 
@@ -96,7 +96,6 @@ p {
   }
 
   &__edit {
-    position: absolute;
     font-size: 1.5rem;
     font-weight: 700;
 
