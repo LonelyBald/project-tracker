@@ -9,7 +9,6 @@ export const Header = () => {
         <Link to="/">
           <span className="header__logo">PROJECT TRACKER</span>
         </Link>
-        <span className="header__popup">Projects</span>
       </div>
     </div>
   );

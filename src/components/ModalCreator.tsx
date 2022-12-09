@@ -45,7 +45,7 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
     if (setColumns) {
       setColumns(columnsCopy);
     }
-
+    setPriorityInputValue('');
     setTitleInputValue('');
     setCommentsInputValue('');
     setDescInputValue('');
@@ -58,14 +58,6 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
     isMounted.current = true;
   }, [columns]);
 
-  // useEffect(() => {
-  //   const items = localStorage.getItem('items');
-  //   if (items && setColumns) {
-  //     const parsedItems = JSON.parse(items);
-  //     setColumns(parsedItems);
-  //   }
-  // }, [setColumns]);
-
   return (
     <div
       className={active ? 'modalCreator active' : 'modalCreator'}
@@ -75,7 +67,6 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
         className={active ? 'modalCreator__content active' : 'modalCreator__content'}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="number">1</div>
         <input
           value={titleInputValue}
           onChange={onChangeTitleInput}

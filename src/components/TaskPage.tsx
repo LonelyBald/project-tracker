@@ -112,7 +112,7 @@ export const TaskPage = () => {
               <p>{task.date}</p>
               <p>{task.priority}</p>
               <button
-                className="edit__button"
+                className="item__edit__button"
                 onClick={() => {
                   setModalEditActive(true);
                   changeIndexes(indexTask, indexColumn);

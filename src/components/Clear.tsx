@@ -24,7 +24,7 @@ export const Clear = ({ task, column }: IBoard) => {
   };
 
   return (
-    <div className="item__trash" onClick={onClickClear}>
+    <div className="item__edit__trash" onClick={onClickClear}>
       <Trash />
     </div>
   );

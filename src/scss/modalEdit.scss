@@ -33,6 +33,7 @@
     border: none;
     border-bottom: 1px solid grey;
     outline: none;
+    margin: 10px 0;
   }
   &__title:focus {
     border: none;
@@ -45,6 +46,7 @@
     font-weight: 300;
     border: none;
     outline: none;
+    margin-bottom: 10px;
   }
   &__description:focus {
     border: none;
@@ -56,6 +58,7 @@
     font-weight: 300;
     border-radius: 4px;
     outline: none;
+    margin-bottom: 10px;
   }
   &__button {
     font-size: 20px;

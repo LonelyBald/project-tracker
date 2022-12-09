@@ -24,11 +24,18 @@ export const ModalEdit = ({ active, setActive, changeTask }: ModalEditProps) => 
   };
 
   const handleEditTask = () => {
+    const time = new Date().toLocaleTimeString('en-GB');
+    const date = new Date().toLocaleDateString('en-GB');
     changeTask({
       title: titleInputValue,
       desc: descInputValue,
+      time: time,
+      date: date,
       comments: commentsInputValue,
     });
+    setTitleInputValue('');
+    setCommentsInputValue('');
+    setDescInputValue('');
   };
 
   return (
@@ -37,7 +44,6 @@ export const ModalEdit = ({ active, setActive, changeTask }: ModalEditProps) => 
         className={active ? 'modalEdit__content active' : 'modalEdit__content'}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="number">1</div>
         <input
           className="modalEdit__content__title"
           type="text"
