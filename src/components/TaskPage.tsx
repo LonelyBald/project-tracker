@@ -88,11 +88,12 @@ export const TaskPage = () => {
           className="board"
         >
           <div className="title">
-            {column.title}
+            {column.title === 'Queue' && <div className="title__placeholder" />}
+            <p>{column.title}</p>
             {column.title === 'Queue' && (
-              <button className="title__button" onClick={() => setModalCreatorActive(true)}>
-                +
-              </button>
+              <div className="title__button__container">
+                <button onClick={() => setModalCreatorActive(true)}>+</button>
+              </div>
             )}
           </div>
           {column.tasks.map((task, indexTask) => (
@@ -110,16 +111,18 @@ export const TaskPage = () => {
               <p>{task.time}</p>
               <p>{task.date}</p>
               <p>{task.priority}</p>
-              <button
-                className="item__edit__button"
-                onClick={() => {
-                  setModalEditActive(true);
-                  changeIndexes(indexTask, indexColumn);
-                }}
-              >
-                Edit
-              </button>
-              <Clear task={task} column={column} />
+              <div className="item__edit">
+                <button
+                  className="item__edit__button"
+                  onClick={() => {
+                    setModalEditActive(true);
+                    changeIndexes(indexTask, indexColumn);
+                  }}
+                >
+                  Edit
+                </button>
+                <Clear task={task} column={column} />
+              </div>
             </div>
           ))}
         </div>

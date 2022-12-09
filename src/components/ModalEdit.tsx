@@ -44,7 +44,7 @@ export const ModalEdit = ({ active, setActive, changeTask }: ModalEditProps) => 
   };
 
   return (
-    <div className={active ? 'modalEdit active' : 'modalEdit'} onClick={() => setActive(false)}>
+    <div className={active ? 'modal active' : 'modal'} onClick={() => setActive(false)}>
       <div
         className={active ? 'modal__content active' : 'modal__content'}
         onClick={(e) => e.stopPropagation()}

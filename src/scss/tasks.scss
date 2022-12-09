@@ -23,17 +23,18 @@ p {
 }
 
 .board {
-  position: relative;
-  width: 300px;
-  height: 100%;
-  border: 5px solid lightgray;
+  width: 30%;
+  max-width: 500px;
+  border: 5px solid darkgrey;
   padding: 20px 10px;
   border-radius: 12px;
   margin: 10px;
   display: flex;
+  flex-grow: 1;
   align-items: center;
   flex-direction: column;
   overflow: scroll;
+  overflow-x: hidden;
   @media (max-width: 450px) {
     width: 130px;
     min-height: 50vh;
@@ -43,10 +44,21 @@ p {
 }
 
 .title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     font-size: 1.5rem;
     font-weight: 700;
-  @media (max-width: 450px) {
-    font-size: 13px;
+    margin-bottom: 16px;
+
+  &__button__container{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__placeholder {
+    flex: 1;
   }
   p{
     flex: 2;
@@ -95,23 +107,29 @@ p {
     font-weight: bold;
   }
 
+  p{
+    margin: 8px 0;
+  }
+
   &__edit {
     font-size: 1.5rem;
     font-weight: 700;
+    margin-top: 16px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 
     &__button {
       font-size: 20px;
       color: darkcyan;
       font-weight: bold;
-      border-color: darkcyan;
-      width: 60px;
-      height: 30px;
-      margin-left: 180px;
+      border: 2px solid darkcyan;
       border-radius: 8px;
+      padding: 4px 24px;
       @media (max-width: 450px) {
         font-size: 9px;
-        width: 40px;
-        height: 20px;
+        padding: 2px 4px;
         border-radius: 6px;
         margin-left: 0;
         margin-top: 2px;
@@ -121,9 +139,6 @@ p {
     &__trash {
       width: 25px;
       height: 25px;
-      position: relative;
-      margin-left: 90%;
-      margin-top: 10%;
       cursor: default;
       @media (max-width: 450px) {
         width: 15px;
@@ -133,7 +148,7 @@ p {
     }
 
       &__button:hover {
-        border: none;
+        border: 2px solid transparent;
         color: #fcfcf9;
         background-color: darkcyan;
       }

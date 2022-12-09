@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppRoutes } from './AppRoutes';
 import { ColumnContextProvider } from './context/ColumnContext';
+import './scss/index.scss';
 
 function App() {
   return (
