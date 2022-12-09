@@ -2,14 +2,12 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { ITask } from './TaskPage';
 import { useColumns } from '../hooks/useColumns';
 
-export interface ActiveType {
+interface ModalCreatorProps {
   active: boolean;
   setActive: (open: boolean) => void;
-  column: IColumn;
-  columnIndex: number;
 }
 
-export const ModalCreator = ({ active, setActive }: ActiveType) => {
+export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
   const [titleInputValue, setTitleInputValue] = useState('');
   const [descInputValue, setDescInputValue] = useState('');
   const [commentsInputValue, setCommentsInputValue] = useState('');
