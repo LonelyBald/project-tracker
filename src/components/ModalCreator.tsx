@@ -94,7 +94,7 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
         <input
           className="modalCreator__content__comments"
           type="text"
-          placeholder="Add comments..."
+          placeholder="Add priority..."
           value={priorityInputValue}
           onChange={onChangePriorityInput}
         />
