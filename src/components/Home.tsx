@@ -5,7 +5,7 @@ export const Home = () => {
   return (
     <div>
       <Link to="/tasks">
-        <div className="projects">projects</div>
+        <div className="todo">Press here...</div>
       </Link>
     </div>
   );
