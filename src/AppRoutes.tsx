@@ -7,16 +7,14 @@ import { Layout } from './Layout';
 import { useColumns } from './hooks/useColumns';
 
 export const AppRoutes = () => {
-  const { setColumns } = useColumns();
+  const { setCurrentProjectName } = useColumns();
 
   useEffect(() => {
-    const items = localStorage.getItem('items');
-    if (items && setColumns) {
-      const parsedItems = JSON.parse(items);
-      setColumns(parsedItems);
+    const currentProjectLs = localStorage.getItem('currentProjectName');
+    if (currentProjectLs) {
+      setCurrentProjectName(currentProjectLs);
     }
-    // eslint-disable-next-line
-  }, []);
+  }, [setCurrentProjectName]);
 
   return (
     <BrowserRouter>

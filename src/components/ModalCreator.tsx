@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { ITask } from './TaskPage';
 import { useColumns } from '../hooks/useColumns';
 
-interface ModalCreatorProps {
+export interface ModalCreatorProps {
   active: boolean;
   setActive: (open: boolean) => void;
 }
@@ -12,8 +12,8 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
   const [descInputValue, setDescInputValue] = useState('');
   const [commentsInputValue, setCommentsInputValue] = useState('');
   const [priorityInputValue, setPriorityInputValue] = useState('');
-  const { columns, setColumns } = useColumns();
-  const isMounted = useRef(false);
+  const { columns, setColumns, currentProjectName } = useColumns();
+
   const onChangeTitleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setTitleInputValue(event.target.value);
   };
@@ -50,13 +50,6 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
     setCommentsInputValue('');
     setDescInputValue('');
   };
-
-  useEffect(() => {
-    if (isMounted.current) {
-      localStorage.setItem('items', JSON.stringify(columns));
-    }
-    isMounted.current = true;
-  }, [columns]);
 
   return (
     <div className={active ? 'modal active' : 'modal'} onClick={() => setActive(false)}>

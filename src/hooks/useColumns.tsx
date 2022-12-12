@@ -8,7 +8,7 @@ export const useColumns = () => {
     throw new Error('Use useColumn inside Provider');
   }
 
-  const { columns, setColumns } = context;
+  const { columns, setColumns, currentProjectName, setCurrentProjectName } = context;
 
-  return { columns, setColumns };
+  return { columns, setColumns, currentProjectName, setCurrentProjectName };
 };

@@ -1,10 +1,11 @@
-import React, { DragEvent, useState } from 'react';
+import React, { DragEvent, useEffect, useState } from 'react';
 import '../scss/modal.scss';
 import '../scss/tasks.scss';
 import { ModalCreator } from './ModalCreator';
 import { useColumns } from '../hooks/useColumns';
 import { ModalEdit } from './ModalEdit';
 import { Clear } from './Clear';
+import { columnsInitialValue } from '../context/ColumnContext';
 
 export interface IColumn {
   id: number;
@@ -24,7 +25,7 @@ export interface ITask {
 export type ChangeTaskArgType = { [T: string]: number | string };
 
 export const TaskPage = () => {
-  const { columns, setColumns } = useColumns();
+  const { columns, setColumns, currentProjectName } = useColumns();
   const [currentBoard, setCurrentBoard] = useState<IColumn | null>(null);
   const [currentItem, setCurrentItem] = useState<ITask | null>(null);
   const [modalEditActive, setModalEditActive] = useState(false);
@@ -77,6 +78,18 @@ export const TaskPage = () => {
       });
     }
   };
+
+  useEffect(() => {
+    const items = localStorage.getItem(currentProjectName);
+    if (items && setColumns) {
+      const parsedItems = JSON.parse(items);
+      setColumns(parsedItems);
+    } else {
+      if (setColumns) {
+        setColumns(columnsInitialValue);
+      }
+    }
+  }, [currentProjectName, setColumns]);
 
   return (
     <div className="wrapper">

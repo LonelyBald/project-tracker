@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid gray;
   padding: 20px 40px;
   @media (max-width: 450px) {
@@ -10,4 +10,20 @@
     font-weight: bold;
     color: darkcyan;
   }
+}
+
+.home_create_button {
+  font-size: 100%;
+  margin-right: 50%;
+  font-weight: bold;
+  color: darkcyan;
+  background-color: white;
+  border: none  ;
+  padding: 20px 30px;
+}
+.home_create_button:hover {
+  border-radius: 8px;
+  border: darkcyan;
+  color: white;
+  background-color: darkcyan;
 }
