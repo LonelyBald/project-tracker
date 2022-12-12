@@ -12,7 +12,7 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
   const [descInputValue, setDescInputValue] = useState('');
   const [commentsInputValue, setCommentsInputValue] = useState('');
   const [priorityInputValue, setPriorityInputValue] = useState('');
-  const { columns, setColumns, currentProjectName } = useColumns();
+  const { columns, setColumns } = useColumns();
 
   const onChangeTitleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setTitleInputValue(event.target.value);
