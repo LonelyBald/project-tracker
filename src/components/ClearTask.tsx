@@ -8,7 +8,7 @@ export interface IBoard {
   column: IColumn;
 }
 
-export const Clear = ({ task, column }: IBoard) => {
+export const ClearTask = ({ task, column }: IBoard) => {
   const { columns, setColumns } = useColumns();
 
   const CLEAN_MESSAGE = 'Do you want to delete task?';

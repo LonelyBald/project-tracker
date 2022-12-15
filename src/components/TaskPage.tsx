@@ -4,7 +4,7 @@ import '../scss/tasks.scss';
 import { ModalCreator } from './ModalCreator';
 import { useColumns } from '../hooks/useColumns';
 import { ModalEdit } from './ModalEdit';
-import { Clear } from './Clear';
+import { ClearTask } from './ClearTask';
 import { columnsInitialValue } from '../context/ColumnContext';
 
 export interface IColumn {
@@ -134,7 +134,7 @@ export const TaskPage = () => {
                 >
                   Edit
                 </button>
-                <Clear task={task} column={column} />
+                <ClearTask task={task} column={column} />
               </div>
             </div>
           ))}
