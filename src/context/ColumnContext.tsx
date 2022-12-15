@@ -32,7 +32,6 @@ export const ColumnContext = createContext<ColumnContextInitialValueType | null>
 export const ColumnContextProvider = ({ children }: ColumnContextProviderTypes) => {
   const [currentProjectName, setCurrentProjectName] = useState('');
   const [columns, setColumns] = useState<IColumn[]>(columnsInitialValue);
-  console.log(columns[0].tasks);
   const contextValue = useMemo(
     () => ({ columns, setColumns, currentProjectName, setCurrentProjectName }),
     [columns, currentProjectName]

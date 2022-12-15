@@ -84,8 +84,10 @@ export const TaskPage = () => {
     if (items && setColumns) {
       const parsedItems = JSON.parse(items);
       setColumns(parsedItems);
+      console.log('otrabotal');
     } else {
       if (setColumns) {
+        console.log('neOtrabotal');
         setColumns(columnsInitialValue);
       }
     }

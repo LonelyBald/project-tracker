@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useColumns } from '../hooks/useColumns';
 import { ModalCreateProject } from './ModalCreatProject';
-import { Trash } from '../assets/svg/Trash';
+import { ClearProject } from './ClearProject';
 
 export const Home = () => {
   const { setCurrentProjectName } = useColumns();
@@ -29,10 +29,10 @@ export const Home = () => {
       >
         Create new project +
       </button>
-      {projectNamesList?.map((name) => {
+      {projectNamesList?.map((name, index) => {
         return (
-          <Link to="/tasks" key={name}>
-            <div className="project-table">
+          <div className="project-table">
+            <Link to="/tasks" key={name}>
               <div
                 className="project-table__name"
                 onClick={() => {
@@ -42,11 +42,13 @@ export const Home = () => {
               >
                 {name}
               </div>
-              <div className="project-table__trash">
-                <Trash />
-              </div>
-            </div>
-          </Link>
+            </Link>
+            <ClearProject
+              index={index}
+              setProjectNamesList={setProjectNamesList}
+              projectNameList={projectNamesList}
+            />
+          </div>
         );
       })}
       <ModalCreateProject
