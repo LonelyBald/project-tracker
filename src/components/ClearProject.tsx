@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { SetStateAction, Dispatch } from 'react';
 import { Trash } from '../assets/svg/Trash';
-export const ClearProject = ({ index, projectNameList, setProjectNamesList }) => {
-  const CLEAN_MESSAGE = 'Do you want to delete task?';
+
+interface ClearProjectPropsType {
+  index: number;
+  projectNameList: Array<string>;
+  setProjectNamesList: Dispatch<SetStateAction<string[] | null>>;
+}
+export const ClearProject = ({
+  index,
+  projectNameList,
+  setProjectNamesList,
+}: ClearProjectPropsType) => {
+  const CLEAN_MESSAGE = 'Do you want to delete project?';
   const projectNLCopy = [...projectNameList];
   const onClickClear = () => {
     if (window.confirm(CLEAN_MESSAGE)) {

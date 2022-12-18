@@ -37,6 +37,7 @@ export const ModalEdit = ({ active, setActive, changeTask }: ModalEditProps) => 
       date: date,
       comments: commentsInputValue,
     });
+
     setPriorityInputValue('');
     setTitleInputValue('');
     setCommentsInputValue('');

@@ -47,6 +47,7 @@ export const TaskPage = () => {
 
     if (setColumns) {
       setColumns(columnsCopy);
+      localStorage.setItem(currentProjectName, JSON.stringify(columnsCopy));
     }
   };
 
@@ -65,29 +66,30 @@ export const TaskPage = () => {
       board.tasks.push(currentItem);
       const currentIndex = currentBoard.tasks.indexOf(currentItem);
       currentBoard.tasks.splice(currentIndex, 1);
-      setColumns(() => {
-        return columns.map((column) => {
-          if (column.id === board.id) {
-            return board;
-          }
-          if (column.id === currentBoard.id) {
-            return currentBoard;
-          }
-          return column;
-        });
+      const updatedColumns = columns.map((column) => {
+        if (column.id === board.id) {
+          return board;
+        }
+        if (column.id === currentBoard.id) {
+          return currentBoard;
+        }
+        return column;
       });
+      setColumns(() => {
+        return updatedColumns;
+      });
+      localStorage.setItem(currentProjectName, JSON.stringify(updatedColumns));
     }
   };
 
   useEffect(() => {
     const items = localStorage.getItem(currentProjectName);
+    console.log(items);
     if (items && setColumns) {
       const parsedItems = JSON.parse(items);
       setColumns(parsedItems);
-      console.log('otrabotal');
     } else {
       if (setColumns) {
-        console.log('neOtrabotal');
         setColumns(columnsInitialValue);
       }
     }

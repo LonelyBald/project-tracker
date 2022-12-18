@@ -12,7 +12,7 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
   const [descInputValue, setDescInputValue] = useState('');
   const [commentsInputValue, setCommentsInputValue] = useState('');
   const [priorityInputValue, setPriorityInputValue] = useState('');
-  const { columns, setColumns } = useColumns();
+  const { columns, setColumns, currentProjectName } = useColumns();
 
   const onChangeTitleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setTitleInputValue(event.target.value);
@@ -42,9 +42,11 @@ export const ModalCreator = ({ active, setActive }: ModalCreatorProps) => {
       priority: priorityInputValue,
     } as ITask);
 
-    if (setColumns) {
+    if (setColumns && currentProjectName) {
       setColumns(columnsCopy);
+      localStorage.setItem(currentProjectName, JSON.stringify(columnsCopy));
     }
+
     setPriorityInputValue('');
     setTitleInputValue('');
     setCommentsInputValue('');
